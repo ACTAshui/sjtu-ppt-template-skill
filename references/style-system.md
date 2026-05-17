@@ -37,8 +37,20 @@ Use varied but coherent slide families:
 - mechanism chain
 - risk/comparison matrix
 - timeline
+- data chart or evidence page
 - quote/case page
 - closing synthesis
+
+## Chart Style
+
+For data-heavy or research decks, use [data-visualization.md](data-visualization.md).
+
+- Keep chart backgrounds white or very pale.
+- Use thin axes, light gridlines, and readable labels.
+- Use SJTU red only for emphasis, not as the default color for every series.
+- Pair SJTU blue with color-blind-safe teal, orange, purple, and muted gray when multiple groups are needed.
+- Prefer direct labels and short annotations over crowded legends.
+- Avoid 3D charts, heavy borders, chart shadows, glossy effects, and decorative gradients.
 
 ## Logo Policy
 
@@ -53,4 +65,3 @@ Use varied but coherent slide families:
 - Keep body copy short.
 - Convert paragraphs into grouped arguments.
 - Use source notes or appendix for citations when a slide would become crowded.
-

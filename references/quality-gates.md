@@ -14,6 +14,7 @@ Run these checks before delivery.
 - `planning/revision-log.md` is updated when revising an existing deck.
 - `planning/image-preferences.md` is updated when user-inserted or user-replaced images are observed.
 - `planning/image-inventory.json` is updated when important deck images are inserted, replaced, moved, or removed.
+- Generated chart outputs have accompanying data/code/source notes when external plotting is used.
 
 ## Render Checks
 
@@ -26,6 +27,7 @@ Render every slide and inspect:
 - page numbers
 - chart labels
 - table readability
+- data figure readability at projected slide size
 - overlapping objects
 - placeholder text
 
@@ -36,3 +38,4 @@ Render every slide and inspect:
 - The chosen template style matches the user's context.
 - The deck looks like a coherent SJTU-style deck, not a generic template with a school name pasted on top.
 - User edits and user-added images from the base deck are preserved unless explicitly changed by request.
+- Each data chart has a clear claim and avoids decorative chart effects.

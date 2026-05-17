@@ -49,6 +49,8 @@ Use the proof object that best fits the claim:
 - quote/case panel for qualitative material
 - visual montage for campus or event storytelling
 
+If the proof object depends on CSV, Excel, experimental data, statistics, or existing chart screenshots, read [data-visualization.md](data-visualization.md) before drawing or inserting charts.
+
 ## 5. Build Editable Slides
 
 Prefer native PowerPoint objects:
