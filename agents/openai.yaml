@@ -1,0 +1,5 @@
+interface:
+  display_name: "SJTU PPT Template"
+  short_description: "Create editable SJTU-style PPT decks"
+  default_prompt: "Use $sjtu-ppt-template to turn my document into a Shanghai Jiao Tong University style editable presentation and choose an appropriate template style."
+
