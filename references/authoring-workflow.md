@@ -61,3 +61,8 @@ Prefer native PowerPoint objects:
 
 Avoid full-slide screenshots except for temporary references or explicitly image-based deliverables.
 
+## 6. Revise Without Overwriting
+
+When the task is an update to an existing deck, do not regenerate from scratch unless the user asks for a full rebuild. Read the latest user-edited deck, preserve their manual changes, then create a new versioned file before applying the new request.
+
+Use [revision-safety.md](revision-safety.md) for naming, revision logs, and image habit tracking.

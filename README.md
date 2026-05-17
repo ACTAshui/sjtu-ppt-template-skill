@@ -19,6 +19,8 @@
 - 根据场景选择正式答辩、学术组会、课程展示、宣传路演等视觉风格。
 - 使用你本地提供的授权校标和 PPT 模板。
 - 生成可编辑的 `.pptx`，而不是整页截图。
+- 每次修订都新建一个带日期、时间和序号的文件，避免覆盖你已经改好的版本。
+- 读取你手动插入或替换的图片，并记录你的图片使用习惯，后续修订尽量保持一致。
 - 在交付前渲染预览，检查中文换行、版式、logo、页脚和内容溢出。
 
 ## 一句话安装
@@ -71,7 +73,10 @@ my-sjtu-deck/
   source/              放 DOCX、PDF、Markdown、提纲或已有 PPT
   assets/logos/        放你有权限使用的校标、院系标识
   assets/templates/    放你有权限使用的 PPTX 模板
+  assets/images/       放你想插入或替换的图片
+  planning/            记录修订日志和图片习惯
   output/              生成后的 PPTX 和预览图
+  output/versions/     每次修订自动新建的新版本
 ```
 
 ## 怎么让 Codex 调用它
@@ -114,8 +119,39 @@ skill 会要求 Codex 按这个顺序处理：
 3. 为每页选择合适的表达方式：标题页、章节页、流程图、矩阵、时间线、图表页、总结页等。
 4. 按场景选择上交视觉风格。
 5. 使用本地授权模板和 logo 生成可编辑 PPT。
-6. 渲染预览图，检查中文排版、内容溢出和整体一致性。
-7. 修正问题后再交付最终 `.pptx`。
+6. 如果是修改已有 PPT，先复制最新版用户文件，再生成新的日期时间序号版本。
+7. 渲染预览图，检查中文排版、内容溢出和整体一致性。
+8. 修正问题后再交付最终 `.pptx`。
+
+## 修订时不会覆盖原文件
+
+如果你已经手动改过 PPT，再让 Codex 继续修改时，这个 skill 会要求它先读取你改过的最新文件，然后新建一个修订版，不直接在原文件上覆盖。
+
+推荐文件名格式：
+
+```text
+原文件名__YYYYMMDD-HHMMSS__rNN.pptx
+```
+
+例如：
+
+```text
+青年与生成式AI_SJTU演示样稿__20260518-143022__r03.pptx
+```
+
+这样你随时可以回到旧版本，不会因为一次自动修改把已经调好的内容破坏掉。
+
+## 会记录你的图片习惯
+
+当你自己插入、替换、裁剪或移动图片后，后续修订会优先保留这些改动，并把你的偏好记录到工作区：
+
+```text
+planning/image-preferences.md
+planning/image-inventory.json
+planning/revision-log.md
+```
+
+它会观察你更喜欢哪类图片、常用什么裁剪比例、图片放左边还是做背景、是否加短标签或说明，也会记录重要图片在第几页、承担什么作用、是否是你手动添加。下一次继续改 PPT 时，Codex 会先读这些记录，再决定怎么维护图片。
 
 ## 常见问题
 
@@ -149,6 +185,7 @@ references/authoring-workflow.md 长文转 PPT 的流程
 references/template-selection.md 模板和风格选择规则
 references/style-system.md       上交风格视觉系统
 references/quality-gates.md      交付前检查清单
+references/revision-safety.md    非覆盖式修订、版本命名和图片习惯记录
 scripts/create_workspace.py      创建本地任务工作区
 assets/.gitkeep                  素材占位，不放官方或私有素材
 ```
