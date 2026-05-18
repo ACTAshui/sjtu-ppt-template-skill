@@ -15,6 +15,7 @@ Run these checks before delivery.
 - `planning/image-preferences.md` is updated when user-inserted or user-replaced images are observed.
 - `planning/image-inventory.json` is updated when important deck images are inserted, replaced, moved, or removed.
 - Generated chart outputs have accompanying data/code/source notes when external plotting is used.
+- `planning/speaker-note-locks.json` is checked before updating notes or visible content on revised decks.
 
 ## Render Checks
 
@@ -28,6 +29,7 @@ Render every slide and inspect:
 - chart labels
 - table readability
 - data figure readability at projected slide size
+- speaker notes presence for expected presentation slides
 - overlapping objects
 - placeholder text
 
@@ -39,3 +41,4 @@ Render every slide and inspect:
 - The deck looks like a coherent SJTU-style deck, not a generic template with a school name pasted on top.
 - User edits and user-added images from the base deck are preserved unless explicitly changed by request.
 - Each data chart has a clear claim and avoids decorative chart effects.
+- User-corrected speaker notes and visible content on locked slides are preserved.

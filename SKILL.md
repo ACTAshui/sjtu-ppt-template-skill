@@ -1,6 +1,6 @@
 ---
 name: sjtu-ppt-template
-description: Create Shanghai Jiao Tong University style editable PowerPoint decks from DOCX, notes, outlines, reports, papers, datasets, course materials, project summaries, or draft slides. Use when the user asks for 上海交通大学, 上海交大, 上交, SJTU, school-branded PPT, academic report slides, seminar decks, thesis defense slides, group meeting slides, course presentation decks, template selection, data visualization, scientific charts, Nature-like plotting, or converting Chinese research writing into a polished editable SJTU-style presentation.
+description: Create Shanghai Jiao Tong University style editable PowerPoint decks from DOCX, notes, outlines, reports, papers, datasets, course materials, project summaries, or draft slides. Use when the user asks for 上海交通大学, 上海交大, 上交, SJTU, school-branded PPT, academic report slides, seminar decks, thesis defense slides, group meeting slides, course presentation decks, template selection, speaker notes, 演讲稿, 备注, data visualization, scientific charts, Nature-like plotting, or converting Chinese research writing into a polished editable SJTU-style presentation.
 ---
 
 # SJTU PPT Template
@@ -30,8 +30,9 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
 4. Select a style using [references/template-selection.md](references/template-selection.md).
 5. Build native editable slides: text boxes, shapes, tables, charts, diagrams, and images.
 6. If the task includes data, CSV, Excel, statistical tables, or chart polish, use [references/data-visualization.md](references/data-visualization.md).
-7. For revisions, follow [references/revision-safety.md](references/revision-safety.md): never overwrite a source or user-edited PPTX; create a new timestamped version first.
-8. Render previews, check layout, and iterate before delivery.
+7. Generate and insert speaker notes when requested or when the deck is for live presentation; use [references/speaker-notes.md](references/speaker-notes.md).
+8. For revisions, follow [references/revision-safety.md](references/revision-safety.md): never overwrite a source or user-edited PPTX; create a new timestamped version first.
+9. Render previews, check layout, and iterate before delivery.
 
 ## What This Skill Should Demonstrate
 
@@ -41,6 +42,7 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
 - Produce editable PPTX content, not a stack of full-slide screenshots.
 - Reuse user-provided templates and logos responsibly.
 - Preserve user-edited decks by creating a new dated revision file for every update.
+- Generate per-slide speaker notes, insert them into PPT speaker notes, and keep them synchronized unless a user-corrected slide is locked.
 - Learn from user-inserted images and keep image choices consistent across later revisions.
 - Turn user-provided data into clean, reproducible, PPT-ready, Nature-like scientific charts when needed.
 - Keep a consistent formal SJTU visual system across cover, section, content, chart, matrix, and closing pages.
@@ -76,6 +78,19 @@ Read [references/authoring-workflow.md](references/authoring-workflow.md) for de
 5. Apply the selected SJTU style system.
 6. If revising an existing deck, copy the latest user-edited deck to a new versioned file before making changes.
 7. Render and inspect every slide.
+
+## Speaker Notes And Presentation Script
+
+Read [references/speaker-notes.md](references/speaker-notes.md) when the user asks for 演讲稿, 讲稿, speaker notes, speaker script, 备注, presentation notes, or when a deck is intended for live presenting.
+
+Core rules:
+
+- Generate concise per-slide speaker notes that match each slide claim and audience.
+- Insert notes into the PPTX speaker notes area, not visible slide text, whenever the authoring/editing tool supports notes.
+- If the user provides a script, align it slide-by-slide instead of replacing it wholesale.
+- When the deck changes, update notes for changed slides automatically unless that slide is locked.
+- After the user corrects a slide's notes or content in the first review round, mark that slide locked; future revisions must not change that slide's notes or content unless the user explicitly unlocks it.
+- If AI wants to substantially rewrite user-provided notes, present the proposed change and ask for confirmation before applying it.
 
 ## Data Visualization And Scientific Charts
 
@@ -129,6 +144,7 @@ Before final delivery:
 - Confirm important text is editable.
 - Render all slides and inspect Chinese wrapping, logo sharpness, footer alignment, text overflow, and chart readability.
 - For generated charts, confirm data/code/output files are saved and the rendered chart remains readable in slide previews.
+- Confirm speaker notes exist for expected slides and that user-locked notes/content were not changed.
 - Fix the source deck and rerender if visual defects appear.
 
 ## Resources
@@ -140,6 +156,7 @@ Before final delivery:
 - [references/quality-gates.md](references/quality-gates.md): final verification checklist.
 - [references/revision-safety.md](references/revision-safety.md): non-destructive revision naming, user-edit preservation, and image habit tracking.
 - [references/bundled-assets.md](references/bundled-assets.md): bundled logo, PPT template, and font inventory.
+- [references/speaker-notes.md](references/speaker-notes.md): speaker script generation, PPT notes insertion, note synchronization, and user-correction locks.
 - `scripts/create_workspace.py`: creates a clean local workspace for source files and user-provided assets.
 - `scripts/plot_style.py`: reusable Matplotlib styling helper for SJTU/Nature-like PPT charts.
 - `assets/`: bundled logos, templates, and fonts. See [ASSET_NOTICE.md](ASSET_NOTICE.md) before use or redistribution.

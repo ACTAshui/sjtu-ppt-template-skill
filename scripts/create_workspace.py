@@ -92,6 +92,8 @@ def main() -> None:
         "image_preferences": "planning/image-preferences.md",
         "image_inventory": "planning/image-inventory.json",
         "figure_plan": "planning/figure-plan.md",
+        "speaker_notes": "planning/speaker-notes.md",
+        "speaker_note_locks": "planning/speaker-note-locks.json",
         "bundled_assets_dir": "assets",
         "bundled_assets_copied": not args.no_bundled_assets,
         "notes": [
@@ -131,6 +133,18 @@ def main() -> None:
     if not shared_readme.exists():
         shared_readme.write_text(
             "# Figure Workflow\n\nCreate one folder per important chart with code/, data/, outputs/, sources/, and README.md. Keep generated charts reproducible.\n",
+            encoding="utf-8",
+        )
+    speaker_notes = workspace / "planning" / "speaker-notes.md"
+    if not speaker_notes.exists():
+        speaker_notes.write_text(
+            "# Speaker Notes\n\nRecord generated or user-provided per-slide speaker notes here. Mirror inserted PPT speaker notes for review.\n",
+            encoding="utf-8",
+        )
+    speaker_note_locks = workspace / "planning" / "speaker-note-locks.json"
+    if not speaker_note_locks.exists():
+        speaker_note_locks.write_text(
+            json.dumps({"slides": {}}, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
     copied_assets: dict[str, list[str]] = {"logos": [], "templates": [], "fonts": []}

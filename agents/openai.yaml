@@ -1,4 +1,4 @@
 interface:
   display_name: "SJTU PPT Template"
-  short_description: "Create editable SJTU-style PPT decks with safe revisions and polished charts"
-  default_prompt: "Use $sjtu-ppt-template to create or revise my Shanghai Jiao Tong University style editable presentation. Preserve user edits, save a new timestamped version, and make data charts clean, readable, and PPT-ready when needed."
+  short_description: "Create SJTU PPT decks with safe revisions, polished charts, and speaker notes"
+  default_prompt: "Use $sjtu-ppt-template to create or revise my Shanghai Jiao Tong University style editable presentation. Preserve user edits, save a new timestamped version, make data charts PPT-ready, and insert per-slide speaker notes when needed."

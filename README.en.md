@@ -22,6 +22,8 @@ The skill guides Codex to:
 - Generate editable `.pptx` files instead of full-slide screenshots.
 - Create a new timestamped revision file for every update, so user-edited decks are not overwritten.
 - Read user-inserted or user-replaced images and record image habits for later revisions.
+- Generate per-slide speaker notes/scripts and insert them into the PPT speaker notes area.
+- After the user corrects a slide's notes or visible content in the first review round, lock that slide so later revisions do not automatically change it.
 - Apply Nature-like scientific visualization rules when handling CSV, Excel, experimental data, or statistical tables.
 - Render previews and check Chinese wrapping, layout, logos, footers, chart readability, and overflow before delivery.
 
@@ -81,6 +83,8 @@ my-sjtu-deck/
   assets/images/       images to insert or replace
   figures/             chart code, chart data, PNG/PDF/SVG outputs
   planning/            revision logs, image habits, and chart plans
+  planning/speaker-notes.md
+  planning/speaker-note-locks.json
   output/previews/     rendered slide previews
   output/versions/     new versioned PPTX files
 ```
@@ -105,6 +109,12 @@ For data and charts:
 Use the sjtu-ppt-template skill to process this Excel dataset and make the key results into academic presentation charts. I want a clean, restrained, Nature-like style with clear labels and PPT-ready outputs.
 ```
 
+For speaker notes:
+
+```text
+Use the sjtu-ppt-template skill to generate speaker notes for every slide and insert them into the PPT speaker notes area. If I correct a slide's notes or visible content, lock that slide and do not automatically change it in later revisions.
+```
+
 ## Helpful Details To Provide
 
 Tell Codex:
@@ -125,10 +135,24 @@ Tell Codex:
 3. Choose slide roles: cover, divider, flow, matrix, timeline, chart page, summary, etc.
 4. If data is present, clean and understand the data before choosing chart types.
 5. Select an SJTU-style visual direction.
-6. Use local authorized templates and logos to generate an editable PPT.
-7. For revisions, copy the latest user-edited deck first and save a new timestamped version.
-8. Render previews and inspect Chinese layout, overflow, chart readability, and visual consistency.
-9. Fix issues before delivering the final `.pptx`.
+6. Generate or align per-slide speaker notes and insert them into the PPT speaker notes area.
+7. Use local authorized templates and logos to generate an editable PPT.
+8. For revisions, copy the latest user-edited deck first and save a new timestamped version.
+9. Render previews and inspect Chinese layout, overflow, chart readability, and visual consistency.
+10. Fix issues before delivering the final `.pptx`.
+
+## Speaker Notes
+
+The skill can generate natural per-slide speaker notes from the slide claim, visible content, charts, images, and source materials, then insert them into the PowerPoint speaker notes area. Notes are not placed on visible slides unless requested.
+
+If the user provides a script, the skill aligns it slide by slide and preserves the user's voice. If AI wants to substantially rewrite user-provided notes, it asks for confirmation first.
+
+Revision behavior:
+
+- Notes for changed, unlocked slides are updated automatically.
+- If the user corrects a slide's notes or visible content in the first review round, that slide is recorded in `planning/speaker-note-locks.json`.
+- Later revisions do not automatically change locked slide notes or visible content.
+- Locked slides are changed again only after an explicit unlock/edit request.
 
 ## Non-Destructive Revisions
 
@@ -227,6 +251,7 @@ references/data-visualization.md      data processing and Nature-like chart work
 references/quality-gates.md           final checks
 references/revision-safety.md         non-destructive revisions and image habit tracking
 references/bundled-assets.md          bundled logo, PPT template, and font inventory
+references/speaker-notes.md           speaker note generation, insertion, sync, and locks
 scripts/create_workspace.py           local workspace creator
 scripts/plot_style.py                 PPT scientific chart style helper
 assets/logos/                         bundled logo PNGs

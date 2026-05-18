@@ -89,6 +89,15 @@ When revising later:
 - If a new slide needs an image, prefer the user's observed image style before generating or searching for a different style.
 - If image paths have moved, relink to the user's latest supplied image rather than falling back to an older asset.
 
+## Speaker Notes During Revisions
+
+When the deck includes speaker notes, also read [speaker-notes.md](speaker-notes.md).
+
+- Update notes for changed, unlocked slides.
+- Preserve notes for unchanged slides.
+- Do not update notes or visible content for slides locked in `planning/speaker-note-locks.json`.
+- If the user's new request requires changing a locked slide, ask for explicit unlock/approval first.
+
 ## Revision Log Entry
 
 Append entries like:

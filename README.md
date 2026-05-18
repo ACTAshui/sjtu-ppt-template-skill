@@ -14,6 +14,7 @@ This repository now includes user-provided SJTU logo PNGs, PPTX templates, and a
 - Skill entry: [SKILL.md](SKILL.md)
 - Non-destructive revisions: [references/revision-safety.md](references/revision-safety.md)
 - Data visualization and scientific charts: [references/data-visualization.md](references/data-visualization.md)
+- Speaker notes and presentation script: [references/speaker-notes.md](references/speaker-notes.md)
 - Bundled assets: [references/bundled-assets.md](references/bundled-assets.md)
 - Asset notice: [ASSET_NOTICE.md](ASSET_NOTICE.md)
 - Template selection: [references/template-selection.md](references/template-selection.md)
