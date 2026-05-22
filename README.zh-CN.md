@@ -1,6 +1,6 @@
 # SJTU PPT Template Skill 中文说明
 
-一个给 Codex 使用的上海交通大学风格 PPT 生成与修订 skill。它的目标不是简单套背景，而是帮助 Codex 先理解材料，再按汇报场景选择合适的上交风格，生成可继续编辑的 PowerPoint。
+一个给 Codex 使用的上海交通大学风格 PPT 生成与修订 skill。它的目标不是简单套背景，而是帮助 Codex 先理解材料，再按汇报场景选择合适的上交风格，生成可继续编辑、可复查、可继续迭代的 PowerPoint。现在它还包含可编辑流程图/结构图、网页图文采集、可视化复查和科研图表优化流程。
 
 > 个人公开项目，非上海交通大学官方发布。本仓库现在包含你提供的校标 PNG、PPTX 模板和可选字体包，方便安装后直接使用。使用或再分发前请阅读 [ASSET_NOTICE.md](ASSET_NOTICE.md)，并确认符合原始素材来源、版权、商标和学校视觉规范。
 
@@ -12,6 +12,8 @@
 - 学术讲座、学院/实验室介绍
 - 学生活动、招生宣传、校园文化展示
 - 带数据分析、图表、科研图片优化的汇报材料
+- 需要流程图、结构图、机制图、路线图的演示材料
+- 需要从公开网页整理文字、图片候选和来源记录的演示材料
 
 这个 skill 会引导 Codex 做这些事：
 
@@ -25,7 +27,9 @@
 - 自动生成每页演讲者备注/讲稿，并插入 PPT 的备注区；修订后自动同步未锁定页面的讲稿。
 - 如果你第一轮修正过某页备注或内容，后续默认锁定该页，不再自动改动该页备注和可见内容。
 - 处理 CSV、Excel、实验数据或统计表时，使用更接近 Nature 风格的科研图表规则，让图表更清晰、克制、适合学术汇报。
-- 在交付前渲染预览，检查中文换行、版式、logo、页脚、图表可读性和内容溢出。
+- 生成简单流程图和复杂结构图时，优先使用 PowerPoint 原生形状、连接线和文本框，方便继续编辑。
+- 需要网络资料时，把网页文字、图片候选、URL、访问时间和使用判断记录到工作区，而不是无来源地堆素材。
+- 在交付前渲染预览，检查中文换行、版式、logo、页脚、文字和图片遮挡、颜色对比、流程图清晰度、图表可读性和内容溢出。
 
 ## 一句话安装
 
@@ -81,8 +85,13 @@ my-sjtu-deck/
   assets/templates/    放你有权限使用的 PPTX 模板
   assets/fonts/        放可选字体包
   assets/images/       放你想插入或替换的图片
+  assets/web/pages/    保存公开网页来源页面
+  assets/web/images/   保存网页图片候选
   figures/             放图表代码、数据、PNG/PDF/SVG 输出
-  planning/            记录修订日志、图片习惯和图表计划
+  planning/            记录修订日志、图片习惯、图表计划、网页来源和可视化复查
+  planning/diagram-plan.md
+  planning/visual-qa.md
+  planning/web-sources.md
   planning/speaker-notes.md
   planning/speaker-note-locks.json
   output/previews/     渲染预览图
@@ -115,6 +124,18 @@ my-sjtu-deck/
 请使用 sjtu-ppt-template skill 为这份 PPT 生成每一页的演讲者备注，并自动插入 PPT 备注区。后续如果我改过某页备注或内容，请锁定该页，不要再自动改它。
 ```
 
+如果需要流程图或结构图，可以这样说：
+
+```text
+请使用 sjtu-ppt-template skill，把这段机制整理成可编辑的 PPT 流程图。请同时做一个简单总览图和一个复杂结构图，并渲染预览检查文字、连接线、图片和颜色不要互相遮挡。
+```
+
+如果需要从网上整理图文，可以这样说：
+
+```text
+请使用 sjtu-ppt-template skill，从官方网页整理这次招生宣讲需要的公开文字和图片候选，记录 URL、访问时间和图片来源，然后把网页内容改写成适合 PPT 的表达。
+```
+
 ## 推荐给 Codex 的信息
 
 为了让效果更稳定，最好同时告诉 Codex：
@@ -125,6 +146,7 @@ my-sjtu-deck/
 - 风格偏好：正式、清爽、学术、宣传感、校园文化感等。
 - 是否必须使用某个模板或 logo。
 - 是否需要图表、时间线、机制图、对比矩阵、总结页。
+- 是否需要联网整理资料，以及优先使用或禁止使用哪些网站。
 - 数据来源是什么：CSV、Excel、实验表格、问卷结果、统计摘要等。
 - 图表需要强调什么：趋势、差异、相关性、分组比较、流程机制、证据链等。
 
@@ -135,13 +157,15 @@ skill 会要求 Codex 按这个顺序处理：
 1. 阅读材料，确认主题、用途、听众和页数。
 2. 提炼每页一句话的 claim spine，也就是演示主线。
 3. 为每页选择合适的表达方式：标题页、章节页、流程图、矩阵、时间线、图表页、总结页等。
-4. 如果有数据，先清洗和理解数据，再决定适合的图表类型。
-5. 按场景选择上交视觉风格。
-6. 生成或对齐每页演讲者备注，并插入 PPT 备注区。
-7. 使用本地授权模板和 logo 生成可编辑 PPT。
-8. 如果是修改已有 PPT，先复制最新版用户文件，再生成新的日期时间序号版本。
-9. 渲染预览图，检查中文排版、内容溢出、图表可读性和整体一致性。
-10. 修正问题后再交付最终 `.pptx`。
+4. 如果需要网页资料，先采集公开来源并记录 URL、访问时间、文字片段和图片候选。
+5. 如果有数据，先清洗和理解数据，再决定适合的图表类型。
+6. 如果需要流程图或结构图，先规划节点、层级、连接线和是否可编辑，再开始绘制。
+7. 按场景选择上交视觉风格。
+8. 生成或对齐每页演讲者备注，并插入 PPT 备注区。
+9. 使用本地授权模板和 logo 生成可编辑 PPT。
+10. 如果是修改已有 PPT，先复制最新版用户文件，再生成新的日期时间序号版本。
+11. 渲染预览图，检查中文排版、文字/图片遮挡、颜色对比、流程图清晰度、图表可读性和整体一致性。
+12. 修正问题后再交付最终 `.pptx`。
 
 ## 演讲者备注/讲稿
 
@@ -195,6 +219,22 @@ planning/revision-log.md
 - 更复杂或更学术的图表使用 Python/Matplotlib 生成 PNG + PDF/SVG，再插入 PPT。
 - 采用克制、清晰、适合学术汇报的 Nature-like 视觉规则：少装饰、字体一致、色盲友好、标签直接、线条干净。
 - 每个图表都要服务于某一页的核心结论，而不是为了好看而堆图。
+
+## 可编辑流程图与可视化复查
+
+当材料需要流程图、结构图、机制图、路线图时，skill 会参考 [references/diagram-workflow.md](references/diagram-workflow.md)：简单流程优先使用 PowerPoint 原生形状和连接线，复杂结构图也要保留节点、层级和连接逻辑记录，方便后续修改。
+
+交付前会参考 [references/visual-qa.md](references/visual-qa.md)：渲染每页预览图和总览图，检查文字和图片是否遮挡、颜色是否压住信息、标签是否可读、流程图连接线是否清楚。发现问题后修改源 PPT 并重新渲染，不只停留在口头说明。
+
+## 网页图文采集
+
+需要公开网页资料时，skill 会参考 [references/web-content-acquisition.md](references/web-content-acquisition.md)，并可使用：
+
+```bash
+python scripts/web_collect.py ./my-sjtu-deck https://example.edu/page --download-images --max-images 8
+```
+
+采集结果会放在 `assets/web/`，来源说明会记录到 `planning/web-sources.md`。公开发布或正式使用前，需要检查来源权威性、版权和图片使用权限。
 
 ## 内置素材
 
@@ -250,12 +290,16 @@ references/authoring-workflow.md      长文转 PPT 的流程
 references/template-selection.md      模板和风格选择规则
 references/style-system.md            上交风格视觉系统
 references/data-visualization.md      数据处理与 Nature-like 科研图表流程
+references/diagram-workflow.md        可编辑流程图和结构图流程
+references/visual-qa.md               渲染预览、遮挡、对比度和清晰度检查
+references/web-content-acquisition.md 公开网页图文采集和来源记录
 references/quality-gates.md           交付前检查清单
 references/revision-safety.md         非覆盖式修订、版本命名和图片习惯记录
 references/bundled-assets.md          内置校标、模板和字体清单
 references/speaker-notes.md           演讲者备注生成、插入、同步与锁定规则
 scripts/create_workspace.py           创建本地任务工作区
 scripts/plot_style.py                 PPT 科研图表样式助手
+scripts/web_collect.py                公开网页图文采集助手
 assets/logos/                         内置校标 PNG
 assets/templates/                     内置 PPTX 模板
 assets/fonts/                         可选字体包

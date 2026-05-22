@@ -1,6 +1,6 @@
 # SJTU PPT Template Skill English Guide
 
-A Codex skill for creating and safely revising Shanghai Jiao Tong University style editable PowerPoint decks. It helps Codex understand the material first, choose an appropriate SJTU-style presentation direction, and produce an editable `.pptx`.
+A Codex skill for creating and safely revising Shanghai Jiao Tong University style editable PowerPoint decks. It helps Codex understand the material first, choose an appropriate SJTU-style presentation direction, draw editable charts/diagrams, collect public web material with source records when needed, run visual QA, and produce an editable `.pptx`.
 
 > Personal project, not an official Shanghai Jiao Tong University release. This repository now includes user-provided SJTU logo PNGs, PPTX templates, and an optional font package for direct use. Read [ASSET_NOTICE.md](ASSET_NOTICE.md) before public, official, commercial, or redistributed use.
 
@@ -12,6 +12,8 @@ A Codex skill for creating and safely revising Shanghai Jiao Tong University sty
 - Academic lectures, school or lab introductions
 - Student activities, admissions, campus culture
 - Presentation decks with data analysis, charts, scientific figures, or figure polishing
+- Decks that need editable flowcharts, structure diagrams, mechanism diagrams, or research roadmaps
+- Decks that need public web text/image collection with provenance records
 
 The skill guides Codex to:
 
@@ -25,7 +27,9 @@ The skill guides Codex to:
 - Generate per-slide speaker notes/scripts and insert them into the PPT speaker notes area.
 - After the user corrects a slide's notes or visible content in the first review round, lock that slide so later revisions do not automatically change it.
 - Apply Nature-like scientific visualization rules when handling CSV, Excel, experimental data, or statistical tables.
-- Render previews and check Chinese wrapping, layout, logos, footers, chart readability, and overflow before delivery.
+- Draw simple and complex diagrams with editable PPT shapes/connectors whenever feasible.
+- Collect useful web text/image candidates into the workspace and keep URL, access time, snippet, and image-source records.
+- Render previews and check Chinese wrapping, layout, logos, footers, text-image overlap, color contrast, diagram clarity, chart readability, and overflow before delivery.
 
 ## One-Line Install Prompt
 
@@ -81,8 +85,13 @@ my-sjtu-deck/
   assets/templates/    authorized PPTX templates
   assets/fonts/        optional font packages
   assets/images/       images to insert or replace
+  assets/web/pages/    saved public web source pages
+  assets/web/images/   downloaded web image candidates
   figures/             chart code, chart data, PNG/PDF/SVG outputs
-  planning/            revision logs, image habits, and chart plans
+  planning/            revision logs, image habits, chart plans, web sources, visual QA
+  planning/diagram-plan.md
+  planning/visual-qa.md
+  planning/web-sources.md
   planning/speaker-notes.md
   planning/speaker-note-locks.json
   output/previews/     rendered slide previews
@@ -115,6 +124,18 @@ For speaker notes:
 Use the sjtu-ppt-template skill to generate speaker notes for every slide and insert them into the PPT speaker notes area. If I correct a slide's notes or visible content, lock that slide and do not automatically change it in later revisions.
 ```
 
+For editable diagrams and visual QA:
+
+```text
+Use the sjtu-ppt-template skill to turn this mechanism into an editable PPT flowchart. Build both a simple overview and a more detailed structure diagram, then render previews and check that text, connectors, images, and colors do not block each other.
+```
+
+For web-supported material:
+
+```text
+Use the sjtu-ppt-template skill to collect public web text and image candidates from official sources for this admissions presentation. Keep source records, rewrite the web text into slide language, and only use images that are suitable for the deck.
+```
+
 ## Helpful Details To Provide
 
 Tell Codex:
@@ -125,6 +146,7 @@ Tell Codex:
 - Style preference: formal, clean, academic, promotional, campus storytelling, etc.
 - Whether a specific template or logo must be used.
 - Whether charts, timelines, mechanism diagrams, comparison matrices, or summary pages are needed.
+- Whether online sources should be collected and which websites are preferred or prohibited.
 - Data source type: CSV, Excel, experimental table, questionnaire result, statistical summary, etc.
 - What each chart should emphasize: trend, difference, correlation, group comparison, mechanism, evidence chain, etc.
 
@@ -133,13 +155,15 @@ Tell Codex:
 1. Read the material and identify topic, purpose, audience, and slide count.
 2. Write a one-sentence claim spine for the deck.
 3. Choose slide roles: cover, divider, flow, matrix, timeline, chart page, summary, etc.
-4. If data is present, clean and understand the data before choosing chart types.
-5. Select an SJTU-style visual direction.
-6. Generate or align per-slide speaker notes and insert them into the PPT speaker notes area.
-7. Use local authorized templates and logos to generate an editable PPT.
-8. For revisions, copy the latest user-edited deck first and save a new timestamped version.
-9. Render previews and inspect Chinese layout, overflow, chart readability, and visual consistency.
-10. Fix issues before delivering the final `.pptx`.
+4. If web material is needed, collect it with source and usage records before writing slides.
+5. If data is present, clean and understand the data before choosing chart types.
+6. If diagrams are needed, plan nodes, hierarchy, connectors, and editability before drawing.
+7. Select an SJTU-style visual direction.
+8. Generate or align per-slide speaker notes and insert them into the PPT speaker notes area.
+9. Use local authorized templates and logos to generate an editable PPT.
+10. For revisions, copy the latest user-edited deck first and save a new timestamped version.
+11. Render previews and inspect Chinese layout, overlap, color contrast, diagram clarity, chart readability, and visual consistency.
+12. Fix issues before delivering the final `.pptx`.
 
 ## Speaker Notes
 
@@ -193,6 +217,22 @@ When the material includes data tables, CSV, Excel, statistical results, or expe
 - Use Python/Matplotlib for more scientific or complex charts, exporting PNG plus PDF/SVG where appropriate.
 - Apply restrained Nature-like visual rules: minimal decoration, consistent typography, color-blind-safe palettes, direct labels, clean axes, and clear source notes.
 - Make every chart serve a slide-level claim instead of adding charts only for decoration.
+
+## Editable Diagrams And Visual QA
+
+When a deck needs flowcharts or structure diagrams, the skill uses [references/diagram-workflow.md](references/diagram-workflow.md). Simple flows should remain editable PowerPoint shapes and connectors. Complex diagrams should preserve an editable source plan even when a polished export is inserted.
+
+Before delivery, the skill uses [references/visual-qa.md](references/visual-qa.md): render slide previews, inspect contact sheets and full-size pages, check text-image overlap, blocked labels, color contrast, text overflow, and connector clarity, then fix and rerender.
+
+## Web Text/Image Acquisition
+
+When online material is needed, the skill uses [references/web-content-acquisition.md](references/web-content-acquisition.md) and can run:
+
+```bash
+python scripts/web_collect.py ./my-sjtu-deck https://example.edu/page --download-images --max-images 8
+```
+
+Collected material is stored under `assets/web/`, with human-readable source notes in `planning/web-sources.md`. Review source authority, copyright, and usage suitability before inserting web images into public decks.
 
 ## Bundled Assets
 
@@ -248,12 +288,16 @@ references/authoring-workflow.md      source-to-slide workflow
 references/template-selection.md      template and style selection
 references/style-system.md            SJTU-style visual system
 references/data-visualization.md      data processing and Nature-like chart workflow
+references/diagram-workflow.md        editable flowchart and structure diagram workflow
+references/visual-qa.md               rendered-preview overlap, contrast, and clarity checks
+references/web-content-acquisition.md public web text/image collection with provenance
 references/quality-gates.md           final checks
 references/revision-safety.md         non-destructive revisions and image habit tracking
 references/bundled-assets.md          bundled logo, PPT template, and font inventory
 references/speaker-notes.md           speaker note generation, insertion, sync, and locks
 scripts/create_workspace.py           local workspace creator
 scripts/plot_style.py                 PPT scientific chart style helper
+scripts/web_collect.py                public web text/image collection helper
 assets/logos/                         bundled logo PNGs
 assets/templates/                     bundled PPTX templates
 assets/fonts/                         optional font package

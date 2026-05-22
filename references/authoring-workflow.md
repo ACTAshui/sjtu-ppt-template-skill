@@ -51,6 +51,10 @@ Use the proof object that best fits the claim:
 
 If the proof object depends on CSV, Excel, experimental data, statistics, or existing chart screenshots, read [data-visualization.md](data-visualization.md) before drawing or inserting charts.
 
+If the proof object is a process, mechanism, architecture, governance path, or structure diagram, read [diagram-workflow.md](diagram-workflow.md) before drawing. Plan nodes and connectors before placing shapes.
+
+If the proof object depends on public online information or images, read [web-content-acquisition.md](web-content-acquisition.md) before collecting material. Keep source records and permission notes.
+
 ## 5. Build Editable Slides
 
 Prefer native PowerPoint objects:
@@ -63,7 +67,23 @@ Prefer native PowerPoint objects:
 
 Avoid full-slide screenshots except for temporary references or explicitly image-based deliverables.
 
-## 6. Revise Without Overwriting
+For diagrams, use native editable shapes/connectors whenever feasible. For web-supported images, keep source records and verify that placement does not block text or logos.
+
+## 6. Visual QA Before Delivery
+
+Render the PPTX to slide images and inspect the deck using [visual-qa.md](visual-qa.md).
+
+Check:
+
+- text and image overlap
+- blocked labels, footers, logos, and titles
+- low color contrast
+- text overflow and awkward Chinese wrapping
+- chart/table readability
+- diagram connector clarity and label readability
+- user-locked content preservation
+
+## 7. Revise Without Overwriting
 
 When the task is an update to an existing deck, do not regenerate from scratch unless the user asks for a full rebuild. Read the latest user-edited deck, preserve their manual changes, then create a new versioned file before applying the new request.
 

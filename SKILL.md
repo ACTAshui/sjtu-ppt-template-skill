@@ -1,6 +1,6 @@
 ---
 name: sjtu-ppt-template
-description: Create Shanghai Jiao Tong University style editable PowerPoint decks from DOCX, notes, outlines, reports, papers, datasets, course materials, project summaries, or draft slides. Use when the user asks for 上海交通大学, 上海交大, 上交, SJTU, school-branded PPT, academic report slides, seminar decks, thesis defense slides, group meeting slides, course presentation decks, template selection, speaker notes, 演讲稿, 备注, data visualization, scientific charts, Nature-like plotting, or converting Chinese research writing into a polished editable SJTU-style presentation.
+description: Create Shanghai Jiao Tong University style editable PowerPoint decks from DOCX, notes, outlines, reports, papers, datasets, course materials, project summaries, web sources, or draft slides. Use when the user asks for 上海交通大学, 上海交大, 上交, SJTU, school-branded PPT, academic report slides, seminar decks, thesis defense slides, group meeting slides, course presentation decks, template selection, speaker notes, 演讲稿, 备注, data visualization, scientific charts, Nature-like plotting, editable flowcharts, structure diagrams, visual QA, web text/image acquisition, or converting Chinese research writing into a polished editable SJTU-style presentation.
 ---
 
 # SJTU PPT Template
@@ -20,6 +20,7 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
    - `assets/logos/`: bundled SJTU logo PNGs are copied here by default; add authorized department marks if needed.
    - `assets/templates/`: bundled PPTX templates are copied here by default; add authorized custom templates if needed.
    - `assets/fonts/`: bundled optional font package is copied here by default when present.
+   - `assets/web/`: collected web text, source pages, and downloaded images with provenance notes when web material is needed.
 3. Read the source and identify the user's real intent:
    - academic report
    - thesis defense
@@ -29,10 +30,12 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
    - policy/admin briefing
 4. Select a style using [references/template-selection.md](references/template-selection.md).
 5. Build native editable slides: text boxes, shapes, tables, charts, diagrams, and images.
-6. If the task includes data, CSV, Excel, statistical tables, or chart polish, use [references/data-visualization.md](references/data-visualization.md).
-7. Generate and insert speaker notes when requested or when the deck is for live presentation; use [references/speaker-notes.md](references/speaker-notes.md).
-8. For revisions, follow [references/revision-safety.md](references/revision-safety.md): never overwrite a source or user-edited PPTX; create a new timestamped version first.
-9. Render previews, check layout, and iterate before delivery.
+6. If the deck needs flowcharts, roadmaps, mechanism diagrams, or complex structures, use [references/diagram-workflow.md](references/diagram-workflow.md) and keep diagrams editable whenever practical.
+7. If the task includes data, CSV, Excel, statistical tables, or chart polish, use [references/data-visualization.md](references/data-visualization.md).
+8. If web text or images are needed, use [references/web-content-acquisition.md](references/web-content-acquisition.md) and keep source/provenance records.
+9. Generate and insert speaker notes when requested or when the deck is for live presentation; use [references/speaker-notes.md](references/speaker-notes.md).
+10. For revisions, follow [references/revision-safety.md](references/revision-safety.md): never overwrite a source or user-edited PPTX; create a new timestamped version first.
+11. Render previews, run visual QA using [references/visual-qa.md](references/visual-qa.md), and iterate before delivery.
 
 ## What This Skill Should Demonstrate
 
@@ -45,6 +48,9 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
 - Generate per-slide speaker notes, insert them into PPT speaker notes, and keep them synchronized unless a user-corrected slide is locked.
 - Learn from user-inserted images and keep image choices consistent across later revisions.
 - Turn user-provided data into clean, reproducible, PPT-ready, Nature-like scientific charts when needed.
+- Collect useful public web text/images with source records when the user asks for online material.
+- Draw simple and complex flowcharts as editable PowerPoint shapes rather than static screenshots when feasible.
+- Visually review rendered slides for text-image overlap, blocked colors, unclear diagrams, poor contrast, and unreadable labels.
 - Keep a consistent formal SJTU visual system across cover, section, content, chart, matrix, and closing pages.
 
 ## Template Choice
@@ -69,6 +75,8 @@ Read [references/authoring-workflow.md](references/authoring-workflow.md) for de
 1. Extract title, audience, purpose, and source sections.
 2. Write a claim spine: one sentence per slide.
 3. Map each claim to a proof object: chart, table, mechanism, timeline, matrix, quote, or visual comparison.
+   - For flowcharts or structural diagrams, plan the node hierarchy and connector logic before drawing.
+   - For web-supported content, collect sources first and log URLs, capture dates, snippets, and image provenance.
 4. Rebuild content as presentation language:
    - shorten long paragraphs
    - turn lists into grouped arguments
@@ -78,6 +86,32 @@ Read [references/authoring-workflow.md](references/authoring-workflow.md) for de
 5. Apply the selected SJTU style system.
 6. If revising an existing deck, copy the latest user-edited deck to a new versioned file before making changes.
 7. Render and inspect every slide.
+
+## Editable Diagrams And Visual QA
+
+Read [references/diagram-workflow.md](references/diagram-workflow.md) when the deck needs process diagrams, flowcharts, organization diagrams, mechanism diagrams, roadmap structures, or simple/complex architecture diagrams.
+
+Read [references/visual-qa.md](references/visual-qa.md) before final delivery and after substantial revisions.
+
+Core rules:
+
+- Build diagrams from native PowerPoint shapes, text boxes, lines, connectors, groups, tables, or charts whenever practical.
+- Keep simple flows editable; for complex flows, keep an editable source plan even if a polished exported figure is inserted.
+- Render slide previews and inspect every page for object overlap, text overflow, low contrast, blocked images, inconsistent color pairing, and unreadable labels.
+- If visual defects appear, fix the source deck and rerender. Do not only describe the issue.
+- Test diagram quality with at least one simple flow and one complex structure when the deck depends on auto-generated diagrams.
+
+## Web Text And Image Acquisition
+
+Read [references/web-content-acquisition.md](references/web-content-acquisition.md) when the user asks to collect public text, images, news, institutional introductions, project materials, or other online references for a deck.
+
+Core rules:
+
+- Prefer official, primary, or user-approved sources.
+- Save source URL, access time, extracted snippets, image URLs, and usage notes in the task workspace.
+- Do not silently insert copyrighted, private, login-only, or unclear-license images into public-facing decks.
+- Use web material as evidence and visual reference; rewrite slide text into presentation language instead of pasting long webpages.
+- Keep downloaded images under `assets/web/images/` and source page records under `assets/web/pages/`.
 
 ## Speaker Notes And Presentation Script
 
@@ -143,6 +177,9 @@ Before final delivery:
 - Confirm expected slide count.
 - Confirm important text is editable.
 - Render all slides and inspect Chinese wrapping, logo sharpness, footer alignment, text overflow, and chart readability.
+- Check text-image overlap, blocked visual layers, color contrast, and whether key labels remain readable on rendered previews.
+- Confirm generated flowcharts and structure diagrams are clear, logically routed, and editable where feasible.
+- Confirm web-collected material has source notes and is suitable for the deck's use case.
 - For generated charts, confirm data/code/output files are saved and the rendered chart remains readable in slide previews.
 - Confirm speaker notes exist for expected slides and that user-locked notes/content were not changed.
 - Fix the source deck and rerender if visual defects appear.
@@ -153,10 +190,14 @@ Before final delivery:
 - [references/template-selection.md](references/template-selection.md): style selection rules.
 - [references/style-system.md](references/style-system.md): SJTU-style layout, color, and typography defaults.
 - [references/data-visualization.md](references/data-visualization.md): data processing, reproducible figures, and Nature-like PPT chart rules.
+- [references/diagram-workflow.md](references/diagram-workflow.md): editable flowchart and structure diagram rules.
+- [references/visual-qa.md](references/visual-qa.md): rendered-preview review, overlap checks, contrast checks, and iteration loop.
+- [references/web-content-acquisition.md](references/web-content-acquisition.md): public web text/image collection, provenance, and usage checks.
 - [references/quality-gates.md](references/quality-gates.md): final verification checklist.
 - [references/revision-safety.md](references/revision-safety.md): non-destructive revision naming, user-edit preservation, and image habit tracking.
 - [references/bundled-assets.md](references/bundled-assets.md): bundled logo, PPT template, and font inventory.
 - [references/speaker-notes.md](references/speaker-notes.md): speaker script generation, PPT notes insertion, note synchronization, and user-correction locks.
 - `scripts/create_workspace.py`: creates a clean local workspace for source files and user-provided assets.
 - `scripts/plot_style.py`: reusable Matplotlib styling helper for SJTU/Nature-like PPT charts.
+- `scripts/web_collect.py`: collects public web text/image candidates into a task workspace with source records.
 - `assets/`: bundled logos, templates, and fonts. See [ASSET_NOTICE.md](ASSET_NOTICE.md) before use or redistribution.

@@ -64,6 +64,9 @@ def main() -> None:
         "assets/templates",
         "assets/fonts",
         "assets/images",
+        "assets/web",
+        "assets/web/images",
+        "assets/web/pages",
         "figures",
         "figures/_shared",
         "planning",
@@ -92,6 +95,10 @@ def main() -> None:
         "image_preferences": "planning/image-preferences.md",
         "image_inventory": "planning/image-inventory.json",
         "figure_plan": "planning/figure-plan.md",
+        "diagram_plan": "planning/diagram-plan.md",
+        "visual_qa": "planning/visual-qa.md",
+        "web_sources": "planning/web-sources.md",
+        "web_source_manifest": "assets/web/sources.json",
         "speaker_notes": "planning/speaker-notes.md",
         "speaker_note_locks": "planning/speaker-note-locks.json",
         "bundled_assets_dir": "assets",
@@ -100,9 +107,11 @@ def main() -> None:
             "Bundled logos, templates, and fonts are copied into assets/ by default when present.",
             "Place additional authorized logos and PPT templates in assets/.",
             "Place raw CSV, Excel, or statistical data in data/raw/.",
+            "Place or collect web-supported material under assets/web/ and record source provenance in planning/web-sources.md.",
             "Keep private source files inside the task workspace, not inside the skill folder.",
             "Never overwrite user-provided or previously delivered PPTX files; write revisions to output/versions/.",
             "For generated charts, keep plotting code, data, source notes, and outputs under figures/.",
+            "For generated diagrams, keep a diagram plan and verify rendered clarity/editability.",
         ],
     }
     revision_log = workspace / "planning" / "revision-log.md"
@@ -127,6 +136,30 @@ def main() -> None:
     if not figure_plan.exists():
         figure_plan.write_text(
             "# Figure Plan\n\nRecord chart claims, data sources, chart types, output paths, and whether each chart is native PPT or externally generated.\n",
+            encoding="utf-8",
+        )
+    diagram_plan = workspace / "planning" / "diagram-plan.md"
+    if not diagram_plan.exists():
+        diagram_plan.write_text(
+            "# Diagram Plan\n\nRecord flowcharts, structure diagrams, node lists, connector logic, color semantics, and editability decisions.\n",
+            encoding="utf-8",
+        )
+    visual_qa = workspace / "planning" / "visual-qa.md"
+    if not visual_qa.exists():
+        visual_qa.write_text(
+            "# Visual QA\n\nRecord rendered-preview checks, text/image overlap issues, contrast issues, diagram clarity issues, fixes, and final pass status.\n",
+            encoding="utf-8",
+        )
+    web_sources = workspace / "planning" / "web-sources.md"
+    if not web_sources.exists():
+        web_sources.write_text(
+            "# Web Sources\n\nRecord collected web pages, text snippets, candidate images, source URLs, access dates, and usage/permission decisions.\n",
+            encoding="utf-8",
+        )
+    web_manifest = workspace / "assets" / "web" / "sources.json"
+    if not web_manifest.exists():
+        web_manifest.write_text(
+            json.dumps({"sources": []}, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
     shared_readme = workspace / "figures" / "_shared" / "README.md"
