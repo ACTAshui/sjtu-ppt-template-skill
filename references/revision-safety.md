@@ -56,6 +56,21 @@ Rules:
 6. Render the copied version and inspect it.
 7. Append a short entry to `planning/revision-log.md`.
 
+## Conservative Revision Mode
+
+When revising an existing deck, default to conservative mode unless the user explicitly asks for a redesign, rebuild, or page-level restructuring.
+
+In conservative mode:
+
+- Keep the user's existing slide structure, page order, title wording, narrative emphasis, images, and successful layouts.
+- Fix only verifiable problems: broken files, duplicated page numbers, text overflow, obvious typos, unreadable contrast, broken links, missing notes, or explicitly requested changes.
+- Do not replace a working screenshot, diagram, table, or card layout with a new interpretation merely because it could look cleaner.
+- Do not rewrite slide claims or bullets unless the user asks for content rewriting.
+- If a proposed improvement would change the user's meaning, layout rhythm, or a page that already works, create a preview/proposal first instead of applying it silently.
+- If the user reports that a revision damaged good content, immediately return to the latest user-provided base file and produce a restored version before attempting any further optimization.
+
+Treat "polish", "fix", "check", "optimize", and "make it better" on an existing PPT as conservative mode by default. Treat "redesign", "rebuild", "change the style", or "重新做" as permission to restructure only after identifying the base file and saving a new version.
+
 ## User-Edited Content
 
 When the user has edited the deck, treat those edits as intentional unless there is clear evidence otherwise.

@@ -45,6 +45,7 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
 - Produce editable PPTX content, not a stack of full-slide screenshots.
 - Reuse user-provided templates and logos responsibly.
 - Preserve user-edited decks by creating a new dated revision file for every update.
+- For existing decks, default to conservative revision mode: preserve good content and fix only verifiable or explicitly requested issues unless the user asks for redesign.
 - Generate per-slide speaker notes, insert them into PPT speaker notes, and keep them synchronized unless a user-corrected slide is locked.
 - Learn from user-inserted images and keep image choices consistent across later revisions.
 - Turn user-provided data into clean, reproducible, PPT-ready, Nature-like scientific charts when needed.
@@ -148,6 +149,8 @@ Core rules:
 - Do not edit or overwrite the user's source files, previously delivered PPTX, or manually modified PPTX.
 - Before changing a deck, create a new output file named with local date/time plus an incrementing revision number.
 - Treat the newest user-provided or user-edited deck as the base for the next revision.
+- Do not silently replace a working page, screenshot, diagram, or layout in the name of optimization; keep good content unless the user asks for a redesign.
+- If a revision damages good content, restore from the latest user-provided base before making any further changes.
 - Inspect user-added or replaced images before revising; preserve them unless the user asks otherwise.
 - Maintain a local revision log and image preference notes in the task workspace so future revisions can follow the user's habits.
 

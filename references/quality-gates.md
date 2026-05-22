@@ -8,6 +8,8 @@ Run these checks before delivery.
 - Final `.pptx` is a newly named revision file when the task was an update.
 - No source file, user-provided PPTX, or previous delivery was overwritten.
 - Slide count matches the planned outline.
+- If revising an existing deck, confirm whether the task is conservative revision or explicit redesign.
+- If in conservative revision mode, confirm user-approved content and working layouts were not rewritten or replaced.
 - No empty media files.
 - Important slide text is editable.
 - User-provided logos and templates are not embedded in any public skill package unless authorized.
@@ -29,6 +31,7 @@ Render every slide and inspect:
 - logo sharpness
 - footer alignment
 - page numbers
+- duplicated page numbers or duplicated footer elements
 - chart labels
 - table readability
 - data figure readability at projected slide size
@@ -46,6 +49,7 @@ Render every slide and inspect:
 - The chosen template style matches the user's context.
 - The deck looks like a coherent SJTU-style deck, not a generic template with a school name pasted on top.
 - User edits and user-added images from the base deck are preserved unless explicitly changed by request.
+- Existing strong pages are preserved in conservative revision mode; optimization must not silently replace good content.
 - Each data chart has a clear claim and avoids decorative chart effects.
 - User-corrected speaker notes and visible content on locked slides are preserved.
 - Flowcharts and structure diagrams are clear enough to explain verbally without tracing a confusing path.
