@@ -21,6 +21,7 @@ Run these checks before delivery.
 - `planning/visual-qa.md` is updated after rendered preview review.
 - `planning/web-sources.md` and `assets/web/sources.json` are updated when web text or images are collected.
 - `planning/speaker-note-locks.json` is checked before updating notes or visible content on revised decks.
+- If the user reports open failures, the final handoff file is validated with a local presentation engine using [office-compatibility.md](office-compatibility.md).
 
 ## Render Checks
 
@@ -41,6 +42,7 @@ Render every slide and inspect:
 - speaker notes presence for expected presentation slides
 - overlapping objects
 - placeholder text
+- local Office openability when requested or when a previous output failed to open
 
 ## Presentation Checks
 

@@ -30,6 +30,7 @@
 - 生成简单流程图和复杂结构图时，优先使用 PowerPoint 原生形状、连接线和文本框，方便继续编辑。
 - 需要网络资料时，把网页文字、图片候选、URL、访问时间和使用判断记录到工作区，而不是无来源地堆素材。
 - 在交付前渲染预览，检查中文换行、版式、logo、页脚、文字和图片遮挡、颜色对比、流程图清晰度、图表可读性和内容溢出。
+- 当用户反馈 PPT 打不开，或明确要求兼容性检查时，用本机可用的 PowerPoint/WPS/LibreOffice 引擎验证能否打开。
 
 ## 一句话安装
 
@@ -236,6 +237,16 @@ python scripts/web_collect.py ./my-sjtu-deck https://example.edu/page --download
 
 采集结果会放在 `assets/web/`，来源说明会记录到 `planning/web-sources.md`。公开发布或正式使用前，需要检查来源权威性、版权和图片使用权限。
 
+## Office 兼容性检查
+
+当 PPT 打不开或需要本地检查时，skill 会参考 [references/office-compatibility.md](references/office-compatibility.md)，并可运行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/office_bridge.ps1 -InputPptx "C:\path\deck.pptx" -OutputPptx "C:\path\deck_saved.pptx" -Engine auto -Visible
+```
+
+脚本会优先尝试 Microsoft PowerPoint 桌面版，其次 WPS 演示，并记录实际打开成功的引擎。
+
 ## 内置素材
 
 本仓库包含：
@@ -293,6 +304,7 @@ references/data-visualization.md      数据处理与 Nature-like 科研图表�
 references/diagram-workflow.md        可编辑流程图和结构图流程
 references/visual-qa.md               渲染预览、遮挡、对比度和清晰度检查
 references/web-content-acquisition.md 公开网页图文采集和来源记录
+references/office-compatibility.md    本地 PowerPoint/WPS/LibreOffice 打开检查
 references/quality-gates.md           交付前检查清单
 references/revision-safety.md         非覆盖式修订、版本命名和图片习惯记录
 references/bundled-assets.md          内置校标、模板和字体清单
@@ -300,6 +312,7 @@ references/speaker-notes.md           演讲者备注生成、插入、同步与
 scripts/create_workspace.py           创建本地任务工作区
 scripts/plot_style.py                 PPT 科研图表样式助手
 scripts/web_collect.py                公开网页图文采集助手
+scripts/office_bridge.ps1             本地 Office/WPS PPTX 检查和另存助手
 assets/logos/                         内置校标 PNG
 assets/templates/                     内置 PPTX 模板
 assets/fonts/                         可选字体包

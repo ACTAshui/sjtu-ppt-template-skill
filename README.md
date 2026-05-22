@@ -17,6 +17,7 @@ This repository now includes user-provided SJTU logo PNGs, PPTX templates, and a
 - Editable diagrams: [references/diagram-workflow.md](references/diagram-workflow.md)
 - Visual QA: [references/visual-qa.md](references/visual-qa.md)
 - Web text/image acquisition: [references/web-content-acquisition.md](references/web-content-acquisition.md)
+- Office compatibility: [references/office-compatibility.md](references/office-compatibility.md)
 - Speaker notes and presentation script: [references/speaker-notes.md](references/speaker-notes.md)
 - Bundled assets: [references/bundled-assets.md](references/bundled-assets.md)
 - Asset notice: [ASSET_NOTICE.md](ASSET_NOTICE.md)

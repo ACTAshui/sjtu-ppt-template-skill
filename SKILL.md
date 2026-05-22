@@ -36,6 +36,7 @@ This skill includes user-provided logo PNGs, PPTX templates, and an optional fon
 9. Generate and insert speaker notes when requested or when the deck is for live presentation; use [references/speaker-notes.md](references/speaker-notes.md).
 10. For revisions, follow [references/revision-safety.md](references/revision-safety.md): never overwrite a source or user-edited PPTX; create a new timestamped version first.
 11. Render previews, run visual QA using [references/visual-qa.md](references/visual-qa.md), and iterate before delivery.
+12. When local Office compatibility matters, validate the deck with [references/office-compatibility.md](references/office-compatibility.md) and `scripts/office_bridge.ps1`.
 
 ## What This Skill Should Demonstrate
 
@@ -183,6 +184,7 @@ Before final delivery:
 - Check text-image overlap, blocked visual layers, color contrast, and whether key labels remain readable on rendered previews.
 - Confirm generated flowcharts and structure diagrams are clear, logically routed, and editable where feasible.
 - Confirm web-collected material has source notes and is suitable for the deck's use case.
+- Confirm the deck opens in an available local Office engine when the user reports open failures or asks for Office validation.
 - For generated charts, confirm data/code/output files are saved and the rendered chart remains readable in slide previews.
 - Confirm speaker notes exist for expected slides and that user-locked notes/content were not changed.
 - Fix the source deck and rerender if visual defects appear.
@@ -196,6 +198,7 @@ Before final delivery:
 - [references/diagram-workflow.md](references/diagram-workflow.md): editable flowchart and structure diagram rules.
 - [references/visual-qa.md](references/visual-qa.md): rendered-preview review, overlap checks, contrast checks, and iteration loop.
 - [references/web-content-acquisition.md](references/web-content-acquisition.md): public web text/image collection, provenance, and usage checks.
+- [references/office-compatibility.md](references/office-compatibility.md): PowerPoint/WPS/LibreOffice validation and repair workflow.
 - [references/quality-gates.md](references/quality-gates.md): final verification checklist.
 - [references/revision-safety.md](references/revision-safety.md): non-destructive revision naming, user-edit preservation, and image habit tracking.
 - [references/bundled-assets.md](references/bundled-assets.md): bundled logo, PPT template, and font inventory.
@@ -203,4 +206,5 @@ Before final delivery:
 - `scripts/create_workspace.py`: creates a clean local workspace for source files and user-provided assets.
 - `scripts/plot_style.py`: reusable Matplotlib styling helper for SJTU/Nature-like PPT charts.
 - `scripts/web_collect.py`: collects public web text/image candidates into a task workspace with source records.
+- `scripts/office_bridge.ps1`: validates and resaves PPTX files through available local presentation engines.
 - `assets/`: bundled logos, templates, and fonts. See [ASSET_NOTICE.md](ASSET_NOTICE.md) before use or redistribution.

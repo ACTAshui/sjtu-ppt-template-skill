@@ -30,6 +30,7 @@ The skill guides Codex to:
 - Draw simple and complex diagrams with editable PPT shapes/connectors whenever feasible.
 - Collect useful web text/image candidates into the workspace and keep URL, access time, snippet, and image-source records.
 - Render previews and check Chinese wrapping, layout, logos, footers, text-image overlap, color contrast, diagram clarity, chart readability, and overflow before delivery.
+- Validate local Office/WPS/LibreOffice openability when the user reports open failures or asks for compatibility checks.
 
 ## One-Line Install Prompt
 
@@ -234,6 +235,16 @@ python scripts/web_collect.py ./my-sjtu-deck https://example.edu/page --download
 
 Collected material is stored under `assets/web/`, with human-readable source notes in `planning/web-sources.md`. Review source authority, copyright, and usage suitability before inserting web images into public decks.
 
+## Office Compatibility
+
+When a deck fails to open or must be checked locally, the skill uses [references/office-compatibility.md](references/office-compatibility.md) and can run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/office_bridge.ps1 -InputPptx "C:\path\deck.pptx" -OutputPptx "C:\path\deck_saved.pptx" -Engine auto -Visible
+```
+
+The helper tries Microsoft PowerPoint desktop first, then WPS Presentation, and records which engine actually opened the deck.
+
 ## Bundled Assets
 
 This repository includes:
@@ -291,6 +302,7 @@ references/data-visualization.md      data processing and Nature-like chart work
 references/diagram-workflow.md        editable flowchart and structure diagram workflow
 references/visual-qa.md               rendered-preview overlap, contrast, and clarity checks
 references/web-content-acquisition.md public web text/image collection with provenance
+references/office-compatibility.md    local PowerPoint/WPS/LibreOffice validation workflow
 references/quality-gates.md           final checks
 references/revision-safety.md         non-destructive revisions and image habit tracking
 references/bundled-assets.md          bundled logo, PPT template, and font inventory
@@ -298,6 +310,7 @@ references/speaker-notes.md           speaker note generation, insertion, sync, 
 scripts/create_workspace.py           local workspace creator
 scripts/plot_style.py                 PPT scientific chart style helper
 scripts/web_collect.py                public web text/image collection helper
+scripts/office_bridge.ps1             local Office/WPS PPTX validation and resave helper
 assets/logos/                         bundled logo PNGs
 assets/templates/                     bundled PPTX templates
 assets/fonts/                         optional font package
